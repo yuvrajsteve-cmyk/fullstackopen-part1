@@ -29,15 +29,29 @@ const App = () => {
     setVotes(copy)
   }
 
+  const maxVotes = Math.max(...votes)
+  const maxIndex = votes.indexOf(maxVotes)
+
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       {anecdotes[selected]} <br />
 
       <p>has {votes[selected]} votes</p>
 
-      <button onClick={handleVoteClick}>vote</button>
+      <button style={{marginRight: '20px'}} onClick={handleVoteClick}>vote</button>
 
       <button onClick={handleClick}>next anecdotes</button>
+
+      <h1>Anecdote with most votes</h1>
+      {maxVotes === 0 ? (
+        <p>No votes given yet</p>
+      ) : (
+        <div>
+          <p>{anecdotes[maxIndex]}</p>
+          <p>has {maxVotes} votes</p>
+        </div>
+      )}
     </div>
   )
 }
